@@ -1,0 +1,40 @@
+set number
+set wildmenu
+set path+=**
+
+" Enable Ctrl+c and Ctrl+v for copy and paste in vim
+vmap <C-c> "+yi
+vmap <C-x> "+c
+vmap <C-v> c<ESC>"+p
+imap <C-v> <ESC>"+pa
+
+" fzf
+nnoremap  <C-a> <ESC>:Files<CR>
+
+map <C-n> :cnext<CR>
+map <C-m> :cprevious<CR>
+nmap <leader>a :cclose<CR>
+
+autocmd FileType go nmap <leader>b  <Plug>(go-build)
+autocmd FileType go nmap <leader>r  <Plug>(go-run)
+autocmd FileType go nmap <leader>t  <Plug>(go-test)
+autocmd FileType go nmap <Leader>c  <Plug>(go-coverage-toggle)
+autocmd FileType go nmap <Leader>i  <Plug>(go-info)
+
+
+let g:go_fmt_command = "goimports"
+let g:go_metalinter_command="golangci-lint"
+let g:go_metalinter_autosave = 1
+let g:go_auto_type_info = 1
+let g:go_def_mode = 'gopls'
+let g:go_info_mode = 'gopls'
+
+let g:go_debug_windows = {
+   \ 'vars':       'leftabove 40vnew',
+   \ 'stack':      'leftabove 10new',
+   \ 'goroutines': 'botright 10new',
+   \ 'out':        'botright 3new',
+\ }
+
+" let g:go_debug_log_output = 'debugger,rpc'
+let g:go_debug_log_output = ''
