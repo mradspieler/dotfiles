@@ -1,16 +1,14 @@
 set number
 set wildmenu
 set path+=**
-
-"http://stackoverflow.com/questions/20186975/vim-mac-how-to-copy-to-clipboard-without-pbcopy
-"set clipboard^=unnamed
-"set clipboard^=unnamedplus
+set autowrite
+set mouse=r
 
 " increase max memory to show syntax highlighting for large files
 set maxmempattern=20000
 
 " ~/.viminfo needs to be writable and readable. Set oldfiles to 1000 last
-" " recently opened files, :FzfHistory uses it
+" recently opened files, :FzfHistory uses it
 set viminfo='1000
 
 if has('persistent_undo')
@@ -19,12 +17,17 @@ if has('persistent_undo')
 endif
 
 " Enable Ctrl+c and Ctrl+v for copy and paste in vim
-vmap <C-c> "+yi
-vmap <C-x> "+c
-vmap <C-v> c<ESC>"+p
-imap <C-v> <ESC>"+pa
+"vmap <C-c> "+yi
+"vmap <C-x> "+c
+"vmap <C-v> c<ESC>"+p
+"imap <C-v> <ESC>"+pa
+" http://stackoverflow.com/questions/20186975/vim-mac-how-to-copy-to-clipboard-without-pbcopy
+set clipboard^=unnamed
+set clipboard^=unnamedplus
+"vmap <C-c> :w !pbcopy<CR><CR>
 
 " fzf
+" set rtp+=/usr/local/bin/fzf
 nnoremap  <C-a> <ESC>:Files<CR>
 nnoremap  <C-y> <ESC>:Buffers<CR>
 nnoremap  <C-h> <ESC>:History<CR>
@@ -33,6 +36,10 @@ nnoremap  <C-h> <ESC>:History<CR>
 map <C-n> :cn<CR>
 map <C-m> :cp<CR>
 nmap <leader>a :cclose<CR>
+
+" Format JSON
+com! FormatJSON %!jq .
+nmap =j :FormatJSON<CR>
 
 " Fast saving
 nnoremap <leader>w :w!<cr>
@@ -51,12 +58,9 @@ map <C-l> <C-W>l
 " Print full path
 map <C-f> :echo expand("%:p")<cr>
 
-
-autocmd FileType go nmap <leader>b  <Plug>(go-build)
-autocmd FileType go nmap <leader>r  <Plug>(go-run)
-autocmd FileType go nmap <leader>t  <Plug>(go-test)
-autocmd FileType go nmap <Leader>c  <Plug>(go-coverage-toggle)
-autocmd FileType go nmap <Leader>i  <Plug>(go-info)
+" NERDTree autostart
+" autocmd StdinReadPre * let s:std_in=1
+" autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
 " ==================== vim-go ====================
 let g:go_fmt_fail_silently = 1
@@ -130,6 +134,11 @@ endfunction
 augroup go
   autocmd!
 
+  autocmd FileType go nmap <leader>b  <Plug>(go-build)
+  autocmd FileType go nmap <leader>r  <Plug>(go-run)
+  autocmd FileType go nmap <leader>t  <Plug>(go-test)
+  autocmd FileType go nmap <Leader>c  <Plug>(go-coverage-toggle)
+  autocmd FileType go nmap <Leader>i  <Plug>(go-info)
   autocmd FileType go nmap <silent> <Leader>v <Plug>(go-def-vertical)
   autocmd FileType go nmap <silent> <Leader>s <Plug>(go-def-split)
   autocmd FileType go nmap <silent> <Leader>d <Plug>(go-def-tab)
