@@ -29,8 +29,8 @@ set clipboard^=unnamedplus
 " fzf
 " set rtp+=/usr/local/bin/fzf
 nnoremap  <C-a> <ESC>:Files<CR>
-nnoremap  <C-y> <ESC>:Buffers<CR>
-nnoremap  <C-h> <ESC>:History<CR>
+nnoremap  <C-b> <ESC>:Buffers<CR>
+nnoremap  <C-d> <ESC>:History<CR>
 
 " Some useful quickfix shortcuts for quickfix
 map <C-n> :cn<CR>
@@ -43,7 +43,7 @@ nmap =j :FormatJSON<CR>
 
 " Fast saving
 nnoremap <leader>w :w!<cr>
-nnoremap <silent> <leader>q :q!<CR>
+nnoremap <silent> <leader>wq :wq!<CR>
 nnoremap <silent> <leader>qa :qa!<CR>
 
 " Close all but the current one
@@ -54,6 +54,7 @@ map <C-j> <C-W>j
 map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
+map <C-w> <C-W>w
 
 " Print full path
 map <C-f> :echo expand("%:p")<cr>
