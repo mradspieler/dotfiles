@@ -2,7 +2,7 @@ set number
 set wildmenu
 set path+=**
 set autowrite
-set mouse=r
+set mouse=a
 
 " increase max memory to show syntax highlighting for large files
 set maxmempattern=20000
@@ -26,11 +26,40 @@ set clipboard^=unnamed
 set clipboard^=unnamedplus
 "vmap <C-c> :w !pbcopy<CR><CR>
 
+" ==================== FZF ====================
+let g:fzf_layout = { 'down': '~35%' }
+
+" search
+nmap <C-d> :History<CR>
+imap <C-d> <esc>:<C-u>History<CR>
+
+" search Buffers
+nmap <C-b> :Buffers<CR>
+imap <C-b> <esc>:<C-u>Buffers<CR>
+
+" search across files in the current directory
+nmap <C-a> :Files<CR>
+imap <C-a> <esc>:<C-u>Files<CR>
+
+let g:rg_command = '
+  \ rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --color "always"
+  \ -g "*.{js,json,php,md,styl,jade,html,config,py,cpp,c,go,hs,rb,conf}"
+  \ -g "!{.git,node_modules,vendor}/*" '
+
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --color=always '.shellescape(<q-args>), 1,
+  \   <bang>0 ? fzf#vim#with_preview('up:60%')
+  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \   <bang>0)
+
+command! -bang -nargs=* F call fzf#vim#grep(g:rg_command .shellescape(<q-args>), 1, <bang>0)
+
 " fzf
 " set rtp+=/usr/local/bin/fzf
-nnoremap  <C-a> <ESC>:Files<CR>
-nnoremap  <C-b> <ESC>:Buffers<CR>
-nnoremap  <C-d> <ESC>:History<CR>
+"nnoremap  <C-a> <ESC>:Files<CR>
+"nnoremap  <C-b> <ESC>:Buffers<CR>
+"nnoremap  <C-d> <ESC>:History<CR>
 
 " Some useful quickfix shortcuts for quickfix
 map <C-n> :cn<CR>
@@ -42,8 +71,9 @@ com! FormatJSON %!jq .
 nmap =j :FormatJSON<CR>
 
 " Fast saving
-nnoremap <leader>w :w!<cr>
+nnoremap <leader>w :w!<CR>
 nnoremap <silent> <leader>wq :wq!<CR>
+nnoremap <silent> <leader>q :q!<CR>
 nnoremap <silent> <leader>qa :qa!<CR>
 
 " Close all but the current one
@@ -57,7 +87,7 @@ map <C-l> <C-W>l
 map <C-w> <C-W>w
 
 " Print full path
-map <C-f> :echo expand("%:p")<cr>
+map <C-f> :echo expand("%:p")<CR>
 
 " NERDTree autostart
 " autocmd StdinReadPre * let s:std_in=1
@@ -67,58 +97,25 @@ map <C-f> :echo expand("%:p")<cr>
 let g:go_fmt_fail_silently = 1
 let g:go_fmt_command = "goimports"
 let g:go_debug_windows = {
-      \ 'vars':  'leftabove 40vnew',
+      \ 'vars':  'leftabove 35vnew',
       \ 'stack': 'botright 10new',
 \ }
-
-"let g:go_debug_windows = {
-"   \ 'vars':       'leftabove 40vnew',
-"   \ 'stack':      'leftabove 10new',
-"   \ 'goroutines': 'botright 10new',
-"   \ 'out':        'botright 3new',
-"\ }
-
-" let g:go_debug_log_output = 'debugger,rpc'
-" let g:go_debug_log_output = ''
-
-let g:go_test_prepend_name = 1
 let g:go_list_type = "quickfix"
-let g:go_auto_type_info = 0
-let g:go_auto_sameids = 0
-
-let g:go_null_module_warning = 0
-let g:go_echo_command_info = 1
-
 let g:go_autodetect_gopath = 1
-let g:go_metalinter_command="golangci-lint"
-let g:go_metalinter_autosave = 1
-let g:go_metalinter_autosave_enabled = ['vet', 'golint']
-let g:go_metalinter_enabled = ['vet', 'golint']
 
-let g:go_def_mode = 'gopls'
 let g:go_info_mode = 'gopls'
 let g:go_rename_command='gopls'
-let g:go_gopls_complete_unimported = 1
 let g:go_implements_mode='gopls'
 let g:go_diagnostics_enabled = 1
 let g:go_doc_popup_window = 1
 
-let g:go_highlight_space_tab_error = 0
-let g:go_highlight_array_whitespace_error = 0
-let g:go_highlight_trailing_whitespace_error = 0
-let g:go_highlight_extra_types = 0
-let g:go_highlight_build_constraints = 1
-let g:go_highlight_types = 0
-let g:go_highlight_operators = 1
-let g:go_highlight_format_strings = 0
-let g:go_highlight_function_calls = 0
-let g:go_gocode_propose_source = 1
+let g:go_decls_mode = 'fzf'
 
 let g:go_modifytags_transform = 'camelcase'
 let g:go_fold_enable = []
 
-nmap <C-g> :GoDecls<cr>
-imap <C-g> <esc>:<C-u>GoDecls<cr>
+nmap <C-g> :GoDecls<CR>
+imap <C-g> <esc>:<C-u>GoDecls<CR>
 
 
 " run :GoBuild or :GoTestCompile based on the go file
@@ -131,15 +128,9 @@ function! s:build_go_files()
   endif
 endfunction
 
-
 augroup go
   autocmd!
 
-  autocmd FileType go nmap <leader>b  <Plug>(go-build)
-  autocmd FileType go nmap <leader>r  <Plug>(go-run)
-  autocmd FileType go nmap <leader>t  <Plug>(go-test)
-  autocmd FileType go nmap <Leader>c  <Plug>(go-coverage-toggle)
-  autocmd FileType go nmap <Leader>i  <Plug>(go-info)
   autocmd FileType go nmap <silent> <Leader>v <Plug>(go-def-vertical)
   autocmd FileType go nmap <silent> <Leader>s <Plug>(go-def-split)
   autocmd FileType go nmap <silent> <Leader>d <Plug>(go-def-tab)
@@ -162,5 +153,4 @@ augroup go
   autocmd Filetype go command! -bang AS call go#alternate#Switch(<bang>0, 'split')
   autocmd Filetype go command! -bang AT call go#alternate#Switch(<bang>0, 'tabe')
 augroup END
-
 
