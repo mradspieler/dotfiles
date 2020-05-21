@@ -5,6 +5,8 @@ sync:
 	[ -f ~/.zshrc ] || ln -s $(PWD)/zshrc ~/.zshrc
 	[ -f ~/.tmux.conf ] || ln -s $(PWD)/tmuxconf ~/.tmux.conf
 	[ -f ~/.gitconfig ] || ln -s $(PWD)/gitconfig ~/.gitconfig
+	[ -f ~/.psqlrc ] || ln -s $(PWD)/psqlrc ~/.psqlrc
+	[ -f ~/.config/alacritty/alacritty.yml ] || ln -s $(PWD)/gitconfig ~/.config/alacritty/alacritty.yml
 
 clean:
 	rm -f ~/.vimrc.local 
