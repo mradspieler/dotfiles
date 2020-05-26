@@ -4,3 +4,9 @@ UnBundle 'amirh/HTML-AutoCloseTag'
 Bundle 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Bundle 'junegunn/fzf.vim'
 Bundle 'myusuf3/numbers.vim'
+" UnBundle 'Shougo/neocomplete.vim'
+Bundle 'Shougo/deoplete.nvim'
+Bundle 'deoplete-plugins/deoplete-go'
+Bundle 'roxma/nvim-yarp'
+Bundle 'roxma/vim-hug-neovim-rpc'
+Bundle 'nsf/gocode', {'rtp': 'vim/'}

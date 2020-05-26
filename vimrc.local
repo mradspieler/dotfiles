@@ -62,8 +62,8 @@ command! -bang -nargs=* F call fzf#vim#grep(g:rg_command .shellescape(<q-args>),
 "nnoremap  <C-d> <ESC>:History<CR>
 
 " Some useful quickfix shortcuts for quickfix
-map <C-n> :cn<CR>
-map <C-m> :cp<CR>
+map <leader>n :cn<CR>
+map <leader>p :cp<CR>
 nmap <leader>a :cclose<CR>
 
 " Format JSON
@@ -93,6 +93,16 @@ map <C-f> :echo expand("%:p")<CR>
 " autocmd StdinReadPre * let s:std_in=1
 " autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
+" ==================== Completion + Snippet ====================
+" " Ultisnips has native support for SuperTab. SuperTab does omnicompletion by
+" " pressing tab. I like this better than autocompletion, but it's still fast.
+"let g:SuperTabDefaultCompletionType = context
+"let g:SuperTabContextTextOmniPrecedence = ['&omnifunc', '&completefunc']
+"let g:UltiSnipsExpandTrigger="<tab>"
+"let g:UltiSnipsJumpForwardTrigger="<tab>"
+"let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+
+
 " ==================== vim-go ====================
 let g:go_fmt_fail_silently = 1
 let g:go_fmt_command = "goimports"
@@ -113,6 +123,11 @@ let g:go_decls_mode = 'fzf'
 
 let g:go_modifytags_transform = 'camelcase'
 let g:go_fold_enable = []
+
+let g:go_metalinter_command = 'golangci-lint' "golangci-lint
+let g:go_gopls_staticcheck = 1
+let g:go_metalinter_autosave = 1
+let g:go_metalinter_deadline = '5s'
 
 nmap <C-g> :GoDecls<CR>
 imap <C-g> <esc>:<C-u>GoDecls<CR>
@@ -152,5 +167,8 @@ augroup go
   autocmd Filetype go command! -bang AV call go#alternate#Switch(<bang>0, 'vsplit')
   autocmd Filetype go command! -bang AS call go#alternate#Switch(<bang>0, 'split')
   autocmd Filetype go command! -bang AT call go#alternate#Switch(<bang>0, 'tabe')
+  let g:neosnippet#snippets_directory='~/.vim/bundle/vim-go/gosnippets/snippets/'
 augroup END
 
+" Use deoplete.
+let g:deoplete#enable_at_startup = 1
