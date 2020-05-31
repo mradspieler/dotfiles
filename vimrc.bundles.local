@@ -15,4 +15,6 @@ Bundle 'deoplete-plugins/deoplete-tag'
 Bundle 'deoplete-plugins/deoplete-dictionary'
 Bundle 'roxma/nvim-yarp'
 Bundle 'roxma/vim-hug-neovim-rpc'
+Bundle 'Shougo/neco-syntax'
+Bundle 'Shougo/neco-vim'
 Bundle 'nsf/gocode', {'rtp': 'vim/'}

@@ -174,5 +174,3 @@ augroup END
 
 " Use deoplete.
 let g:deoplete#enable_at_startup = 1
-
-nnoremap <silent> <leader>ff :ProjectRootExe Files<cr>
