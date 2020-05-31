@@ -37,9 +37,9 @@ imap <C-d> <esc>:<C-u>History<CR>
 nmap <C-b> :Buffers<CR>
 imap <C-b> <esc>:<C-u>Buffers<CR>
 
-" search across files in the current directory
-nmap <C-a> :Files<CR>
-imap <C-a> <esc>:<C-u>Files<CR>
+" search across files in the project root directory
+nmap <C-a> :ProjectRootExe Files<CR>
+imap <C-a> <esc>:ProjectRootExe Files<CR>
 
 let g:rg_command = '
   \ rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --color "always"
@@ -78,6 +78,8 @@ nnoremap <silent> <leader>qa :qa!<CR>
 
 " Close all but the current one
 nnoremap <leader>o :only<CR>
+nnoremap <leader><leader>c :close<CR>
+
 
 " Better split switching
 map <C-j> <C-W>j
@@ -87,7 +89,7 @@ map <C-l> <C-W>l
 map <C-w> <C-W>w
 
 " Print full path
-map <C-f> :echo expand("%:p")<CR>
+map <leader>f :echo expand("%:p")<CR>
 
 " NERDTree autostart
 " autocmd StdinReadPre * let s:std_in=1
@@ -172,3 +174,5 @@ augroup END
 
 " Use deoplete.
 let g:deoplete#enable_at_startup = 1
+
+nnoremap <silent> <leader>ff :ProjectRootExe Files<cr>
