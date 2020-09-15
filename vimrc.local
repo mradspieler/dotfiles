@@ -109,7 +109,7 @@ map <leader>f :echo expand("%:p")<CR>
 
 " ==================== vim-go ====================
 let g:go_fmt_fail_silently = 1
-let g:go_fmt_command = "gopls" "goimports
+let g:go_fmt_command = "goimports"
 let g:go_debug_windows = {
       \ 'vars':  'leftabove 35vnew',
       \ 'stack': 'botright 10new',
