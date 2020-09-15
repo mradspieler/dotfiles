@@ -80,6 +80,8 @@ nnoremap <silent> <leader>qa :qa!<CR>
 nnoremap <leader>o :only<CR>
 nnoremap <leader><leader>c :close<CR>
 
+noremap <Up> 30k
+noremap <Down> 30j
 
 " Better split switching
 map <C-j> <C-W>j
