@@ -107,7 +107,7 @@ map <leader>f :echo expand("%:p")<CR>
 
 " ==================== vim-go ====================
 let g:go_fmt_fail_silently = 1
-let g:go_fmt_command = "goimports"
+let g:go_fmt_command = "gopls" "goimports
 let g:go_debug_windows = {
       \ 'vars':  'leftabove 35vnew',
       \ 'stack': 'botright 10new',
@@ -115,8 +115,8 @@ let g:go_debug_windows = {
 let g:go_list_type = "quickfix"
 let g:go_autodetect_gopath = 1
 
-let g:go_info_mode = 'gopls'
-let g:go_rename_command='gopls'
+"let g:go_info_mode = 'gopls'
+"let g:go_rename_command='gopls'
 let g:go_implements_mode='gopls'
 let g:go_diagnostics_enabled = 1
 let g:go_doc_popup_window = 1
@@ -126,7 +126,7 @@ let g:go_decls_mode = 'fzf'
 let g:go_modifytags_transform = 'camelcase'
 let g:go_fold_enable = []
 
-let g:go_metalinter_command = 'golangci-lint' "golangci-lint
+let g:go_metalinter_command = 'gopls' "golangci-lint
 let g:go_gopls_staticcheck = 1
 let g:go_metalinter_autosave = 1
 let g:go_metalinter_deadline = '5s'
@@ -170,7 +170,9 @@ augroup go
   autocmd Filetype go command! -bang AS call go#alternate#Switch(<bang>0, 'split')
   autocmd Filetype go command! -bang AT call go#alternate#Switch(<bang>0, 'tabe')
   let g:neosnippet#snippets_directory='~/.vim/bundle/vim-go/gosnippets/snippets/'
+  let g:neosnippet#disable_select_mode_mappings = 0
 augroup END
 
-" Use deoplete.
+"Use deoplete.
 let g:deoplete#enable_at_startup = 1
+call deoplete#custom#option('omni_patterns', { 'go': '[^. *\t]\.\w*' })
