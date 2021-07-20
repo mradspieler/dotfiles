@@ -17,14 +17,13 @@ if has('persistent_undo')
 endif
 
 " Enable Ctrl+c and Ctrl+v for copy and paste in vim
-"vmap <C-c> "+yi
-"vmap <C-x> "+c
-"vmap <C-v> c<ESC>"+p
-"imap <C-v> <ESC>"+pa
+vmap <C-c> "+yi
+vmap <C-x> "+c
+vmap <C-v> c<ESC>"+p
+imap <C-v> <ESC>"+pa
 " http://stackoverflow.com/questions/20186975/vim-mac-how-to-copy-to-clipboard-without-pbcopy
-set clipboard^=unnamed
-set clipboard^=unnamedplus
-"vmap <C-c> :w !pbcopy<CR><CR>
+set clipboard=unnamed
+set clipboard=unnamedplus
 
 " ==================== FZF ====================
 let g:fzf_layout = { 'down': '~35%' }
@@ -80,9 +79,6 @@ nnoremap <silent> <leader>qa :qa!<CR>
 nnoremap <leader>o :only<CR>
 nnoremap <leader><leader>c :close<CR>
 
-noremap <Up> 30k
-noremap <Down> 30j
-
 " Better split switching
 map <C-j> <C-W>j
 map <C-k> <C-W>k
@@ -96,6 +92,10 @@ map <leader>f :echo expand("%:p")<CR>
 " NERDTree autostart
 " autocmd StdinReadPre * let s:std_in=1
 " autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+nnoremap <leader>ntf :NERDTreeFocus<CR>
+nnoremap <leader>nt :NERDTree<CR>
+nnoremap <leader>ntt :NERDTreeToggle<CR>
+nnoremap <leader>fi :NERDTreeFind<CR>
 
 " ==================== Completion + Snippet ====================
 " " Ultisnips has native support for SuperTab. SuperTab does omnicompletion by
@@ -176,5 +176,9 @@ augroup go
 augroup END
 
 "Use deoplete.
-let g:deoplete#enable_at_startup = 1
-call deoplete#custom#option('omni_patterns', { 'go': '[^. *\t]\.\w*' })
+"let g:deoplete#enable_at_startup = 1
+"
+"[deoplete] g:deoplete#keyword_patterns is deprecated variable.  Please use deoplete#custom#option() instead.
+"[deoplete] g:deoplete#max_list is deprecated variable.  Please use deoplete#custom#option() instead.
+"[deoplete] g:deoplete#enable_smart_case is deprecated variable.  Please use deoplete#custom#option() instead.
+
