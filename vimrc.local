@@ -138,8 +138,6 @@ function! s:check_back_space() abort
 	  return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
-" ==================== CoC ====================
-"let g:coc_snippet_next = '<tab>'
 
 " ==================== gruvbox ====================
 color gruvbox
@@ -147,14 +145,8 @@ let g:gruvbox_contrast_light = 'medium'
 let g:gruvbox_invert_indent_guides = 1
 set bg=light
 
-
-" Set internal encoding of vim, not needed on neovim, since coc.nvim using some
-" unicode characters in the file autoload/float.vim
-set encoding=utf-8
-
-" TextEdit might fail if hidden is not set.
-set hidden
-
+" ==================== CoC =========================
+"let g:coc_snippet_next = '<tab>'
 " Some servers have issues with backup files, see #649.
 set nobackup
 set nowritebackup
@@ -177,34 +169,6 @@ if has("nvim-0.5.0") || has("patch-8.1.1564")
 else
   set signcolumn=yes
 endif
-  autocmd FileType go nmap <silent> <Leader>v <Plug>(go-def-vertical)
-  autocmd FileType go nmap <silent> <Leader>s <Plug>(go-def-split)
-  autocmd FileType go nmap <silent> <Leader>d <Plug>(go-def-tab)
-
-  autocmd FileType go nmap <silent> <Leader>x <Plug>(go-doc-vertical)
-
-  autocmd FileType go nmap <silent> <Leader>i <Plug>(go-info)
-  autocmd FileType go nmap <silent> <Leader>l <Plug>(go-metalinter)
-
-  autocmd FileType go nmap <silent> <leader>b :<C-u>call <SID>build_go_files()<CR>
-  autocmd FileType go nmap <silent> <leader>t  <Plug>(go-test)
-  autocmd FileType go nmap <silent> <leader>r  <Plug>(go-run)
-  autocmd FileType go nmap <silent> <leader>e  <Plug>(go-install)
-
-  autocmd FileType go nmap <silent> <Leader>c <Plug>(go-coverage-toggle)
-
-  " I like these more!
-  autocmd Filetype go command! -bang A call go#alternate#Switch(<bang>0, 'edit')
-  autocmd Filetype go command! -bang AV call go#alternate#Switch(<bang>0, 'vsplit')
-  autocmd Filetype go command! -bang AS call go#alternate#Switch(<bang>0, 'split')
-  autocmd Filetype go command! -bang AT call go#alternate#Switch(<bang>0, 'tabe')
-  let g:neosnippet#snippets_directory='~/.vim/bundle/vim-go/gosnippets/snippets/'
-  let g:neosnippet#disable_select_mode_mappings = 0
-augroup END
-
-nnoremap <Leader>p :set invpaste paste?<CR>
-set pastetoggle=<Leader>p
-set showmode
 
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
@@ -234,8 +198,8 @@ inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
 
 " Use `[g` and `]g` to navigate diagnostics
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
-"nmap <silent> [g <Plug>(coc-diagnostic-prev)
-"nmap <silent> ]g <Plug>(coc-diagnostic-next)
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
 " GoTo code navigation.
 nmap <silent> gd <Plug>(coc-definition)
@@ -298,6 +262,16 @@ omap ic <Plug>(coc-classobj-i)
 xmap ac <Plug>(coc-classobj-a)
 omap ac <Plug>(coc-classobj-a)
 
+" Remap <C-f> and <C-b> for scroll float windows/popups.
+if has('nvim-0.4.0') || has('patch-8.2.0750')
+  nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+  nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+  inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+  inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
+  vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+  vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+endif
+
 " Use CTRL-S for selections ranges.
 " Requires 'textDocument/selectionRange' support of language server.
 nmap <silent> <C-s> <Plug>(coc-range-select)
@@ -335,11 +309,12 @@ nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 " ====== cutlass plugin =========
 nnoremap m d
 xnoremap m d
 nnoremap mm dd
 nnoremap M D
+
+" ====== AutoPairs Toggle ======
+imap <C-g>p <M-p>
