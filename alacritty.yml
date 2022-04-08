@@ -160,8 +160,8 @@ bell:
   animation: EaseOutExpo
   duration: 0
 
-# Background opacity
-background_opacity: 1.0
+# window opacity
+window.opacity: 1.0
 
 # Mouse bindings
 #

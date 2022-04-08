@@ -68,6 +68,7 @@ plugins=(
   oc
   vscode
   fzf
+  kubectl
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -163,3 +164,5 @@ fh() {
 }
 
 if [ "$TMUX" = "" ]; then tmux; fi
+
+eval "$(mcfly init zsh)"
