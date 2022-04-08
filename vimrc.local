@@ -159,7 +159,6 @@ set hidden
 set nobackup
 set nowritebackup
 
-<<<<<<< Updated upstream
 " Give more space for displaying messages.
 set cmdheight=2
 
@@ -178,7 +177,6 @@ if has("nvim-0.5.0") || has("patch-8.1.1564")
 else
   set signcolumn=yes
 endif
-=======
   autocmd FileType go nmap <silent> <Leader>v <Plug>(go-def-vertical)
   autocmd FileType go nmap <silent> <Leader>s <Plug>(go-def-split)
   autocmd FileType go nmap <silent> <Leader>d <Plug>(go-def-tab)
@@ -207,7 +205,6 @@ augroup END
 nnoremap <Leader>p :set invpaste paste?<CR>
 set pastetoggle=<Leader>p
 set showmode
->>>>>>> Stashed changes
 
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
@@ -340,3 +337,9 @@ nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+" ====== cutlass plugin =========
+nnoremap m d
+xnoremap m d
+nnoremap mm dd
+nnoremap M D
