@@ -1,8 +1,8 @@
 # If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/go/bin:/Users/q293643/Applications/k9s/execs:/Users/q293643/smdevws/ipst-make/plcconnect:/usr/local/opt/libpq/bin:/usr/local/opt/mosquitto/bin:/Users/q293643/Brokers/kafka_2.13-2.8.1/bin:$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-  export ZSH="/home/markus/.oh-my-zsh"
+  export ZSH="/Users/q293643/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -166,3 +166,6 @@ fh() {
 if [ "$TMUX" = "" ]; then tmux; fi
 
 eval "$(mcfly init zsh)"
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"

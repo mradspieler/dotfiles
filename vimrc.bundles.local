@@ -1,13 +1,12 @@
-Bundle 'fatih/vim-go'
-Bundle 'heracek/HTML-AutoCloseTag', {'name': 'HTML-AutoCloseTag2'}
+UnBundle 'Shougo/neocomplete.vim'
+UnBundle 'ctrlpvim/ctrlp.vim'
+UnBundle 'tacahiroy/ctrlp-funky'
 UnBundle 'amirh/HTML-AutoCloseTag'
+Bundle 'heracek/HTML-AutoCloseTag', {'name': 'HTML-AutoCloseTag2'}
 Bundle 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Bundle 'junegunn/fzf.vim'
 Bundle 'dbakker/vim-projectroot'
 Bundle 'myusuf3/numbers.vim'
-UnBundle 'Shougo/neocomplete.vim'
-Bundle 'Shougo/deoplete.nvim'
-Bundle 'roxma/nvim-yarp'
-Bundle 'roxma/vim-hug-neovim-rpc'
-"Bundle 'Shougo/neco-syntax'
-"Bundle 'Shougo/neco-vim'
+Bundle 'neoclide/coc.nvim', {'branch': 'release'}
+" Bundle 'fatih/vim-go'
+" Bundle 'govim/govim'
