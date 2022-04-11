@@ -33,8 +33,8 @@ set clipboard=unnamed
 let g:fzf_layout = { 'down': '~35%' }
 
 " search
-nmap <C-d> :History<CR>
-imap <C-d> <esc>:<C-u>History<CR>
+nmap <C-e> :History<CR>
+imap <C-e> <esc>:<C-u>History<CR>
 
 " search Buffers
 nmap <C-b> :Buffers<CR>
