@@ -11,4 +11,7 @@ Bundle 'neoclide/coc.nvim', {'branch': 'release'}
 " Bundle 'fatih/vim-go'
 " Bundle 'govim/govim'
 Bundle 'svermeulen/vim-cutlass'
+Bundle 'svermeulen/vim-yoink'
+Bundle 'svermeulen/vim-subversive'
 Bundle 'psliwka/vim-smoothie'
+Bundle 'ryanpcmcquen/fix-vim-pasting'
