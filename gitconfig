@@ -2,7 +2,7 @@
 	whitespace = nowarn
 [user]
 	name = Markus Radspieler
-	email = markus.radspieler@bmw.de
+	email = git@radspieler.org
 [color]
 	status = auto
 	branch = auto
@@ -71,11 +71,3 @@
 	tool = kdiff3
 [diff]
     guitool = kdiff3
-#[http]
-#      sslVerify = false
-#      proxyAuthMethod = basic
-#      proxy = http://qq1pst2:Kxt-q3vdfjobjyr@proxy.muc:8080
-#[https]
-#      sslVerify = false
-#      proxyAuthMethod = basic
-#      proxy = http://qq1pst2:Kxt-q3vdfjobjyr@proxy.muc:8080
