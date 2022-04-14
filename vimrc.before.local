@@ -4,3 +4,5 @@ endif"
 
 let g:spf13_bundle_groups=['general', 'writing', 'programming', 'javascript', 'html', 'misc',]
 "let g:spf13_bundle_groups=['general', 'writing', 'neocomplcache', 'deoplete', 'programming', 'php', 'ruby', 'python', 'javascript', 'html', 'misc',]
+
+let g:airline_powerline_fonts=1
