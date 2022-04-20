@@ -24,16 +24,6 @@ imap <C-v> <ESC>"+pa
 " http://stackoverflow.com/questions/20186975/vim-mac-how-to-copy-to-clipboard-without-pbcopy
 set clipboard=unnamed
 
-" ==================== FZF ====================
-let g:fzf_layout = { 'down': '~35%' }
-
-" search
-nmap <C-y> :History<CR>
-imap <C-y> <esc>:<C-u>History<CR>
-
-" search Buffers
-nmap <C-b> :Buffers<CR>
-imap <C-b> <esc>:<C-u>Buffers<CR>
 
 " search across files in the project root directory
 nmap <C-a> :ProjectRootExe Files<CR>
@@ -52,12 +42,6 @@ command! -bang -nargs=* Rg
   \   <bang>0)
 
 command! -bang -nargs=* F call fzf#vim#grep(g:rg_command .shellescape(<q-args>), 1, <bang>0)
-
-" fzf
-" set rtp+=/usr/local/bin/fzf
-"nnoremap  <C-a> <ESC>:Files<CR>
-"nnoremap  <C-b> <ESC>:Buffers<CR>
-"nnoremap  <C-d> <ESC>:History<CR>
 
 " Some useful quickfix shortcuts for quickfix
 map <leader>n :cn<CR>
@@ -95,9 +79,6 @@ nnoremap <leader>ntf :NERDTreeFocus<CR>
 nnoremap <leader>nt :NERDTree<CR>
 nnoremap <leader>ntt :NERDTreeToggle<CR>
 nnoremap <leader>fi :NERDTreeFind<CR>
-
-" Tagbar
-nmap <leader>m :TagbarToggle<CR>
 
 " ==================== gruvbox ====================
 color gruvbox
