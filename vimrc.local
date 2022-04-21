@@ -85,3 +85,6 @@ color gruvbox
 "let g:gruvbox_contrast_light = 'medium'
 "let g:gruvbox_invert_indent_guides = 1
 "set bg=light
+
+
+let g:coc_global_extensions = ['coc-json', 'coc-snippets',  'coc-css', 'coc-html', 'coc-htmlhint', 'coc-pairs, 'coc-sh', 'coc-sql', 'coc-go', 'coc-yaml',  'coc-coverage']
