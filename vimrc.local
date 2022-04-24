@@ -72,14 +72,6 @@ map <C-w> <C-W>w
 " Print full path
 map <leader>f :echo expand("%:p")<CR>
 
-" NERDTree autostart
-" autocmd StdinReadPre * let s:std_in=1
-" autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-nnoremap <leader>ntf :NERDTreeFocus<CR>
-nnoremap <leader>nt :NERDTree<CR>
-nnoremap <leader>ntt :NERDTreeToggle<CR>
-nnoremap <leader>fi :NERDTreeFind<CR>
-
 " ==================== gruvbox ====================
 color gruvbox
 "let g:gruvbox_contrast_light = 'medium'
@@ -87,3 +79,4 @@ color gruvbox
 "set bg=light
 
 let g:coc_global_extensions = ['coc-json', 'coc-snippets', 'coc-css', 'coc-html', 'coc-htmlhint', 'coc-pairs', 'coc-sh', 'coc-sql', 'coc-go', 'coc-yaml', 'coc-coverage']
+let g:bufferline_echo = 0
