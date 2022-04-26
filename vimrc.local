@@ -53,7 +53,8 @@ com! FormatJSON %!jq .
 nmap =j :FormatJSON<CR>
 
 " Fast saving
-nnoremap <leader>w :w!<CR>
+inoremap <C-s> <C-O>:w<CR>
+nnoremap <silent> <leader>w :w!<CR>
 nnoremap <silent> <leader>wq :wq!<CR>
 nnoremap <silent> <leader>q :q!<CR>
 nnoremap <silent> <leader>qa :qa!<CR>
