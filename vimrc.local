@@ -1,11 +1,12 @@
 set number
 set wildmenu
+set tm=300
 set path+=**
 set autowrite
 set mouse=a
 
 " increase max memory to show syntax highlighting for large files
-set maxmempattern=20000
+set maxmempattern=30000
 
 " ~/.viminfo needs to be writable and readable. Set oldfiles to 1000 last
 " recently opened files, :FzfHistory uses it
@@ -24,10 +25,9 @@ imap <C-v> <ESC>"+pa
 " http://stackoverflow.com/questions/20186975/vim-mac-how-to-copy-to-clipboard-without-pbcopy
 set clipboard=unnamed
 
-
 " search across files in the project root directory
-nmap <C-a> :ProjectRootExe Files<CR>
-imap <C-a> <esc>:ProjectRootExe Files<CR>
+"nmap <C-a> :ProjectRootExe Files<CR>
+"imap <C-a> <esc>:ProjectRootExe Files<CR>
 
 let g:rg_command = '
   \ rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --color "always"
@@ -59,7 +59,7 @@ nnoremap <silent> <leader>wq :wq!<CR>
 nnoremap <silent> <leader>q :q!<CR>
 nnoremap <silent> <leader>qa :qa!<CR>
 
-" Close all but the current one
+" Close all windows but the current one
 nnoremap <leader>o :only<CR>
 nnoremap <leader><leader>c :close<CR>
 
@@ -81,3 +81,52 @@ color gruvbox
 
 let g:coc_global_extensions = ['coc-json', 'coc-snippets', 'coc-css', 'coc-html', 'coc-htmlhint', 'coc-pairs', 'coc-sh', 'coc-sql', 'coc-go', 'coc-yaml', 'coc-coverage']
 let g:bufferline_echo = 0
+
+" this made my vim life much happier!
+" thanks to @ http://vim.wikia.com/wiki/Display_output_of_shell_commands_in_new_window bottom of the page
+function! s:ExecuteInShell(command, bang)
+    let _ = a:bang != '' ? s:_ : a:command == '' ? '' : join(map(split(a:command), 'expand(v:val)'))
+
+    if (_ != '')
+        let s:_ = _
+        let bufnr = bufnr('%')
+        let winnr = bufwinnr('^' . _ . '$')
+        silent! execute  winnr < 0 ? 'belowright new ' . fnameescape(_) : winnr . 'wincmd w'
+        setlocal buftype=nowrite bufhidden=wipe nobuflisted noswapfile wrap number
+        silent! :%d
+        let message = 'Execute ' . _ . '...'
+        call append(0, message)
+        echo message
+        silent! 2d | resize 1 | redraw
+        silent! execute 'silent! %!'. _
+        silent! execute 'resize ' . line('$')
+        silent! execute 'syntax on'
+        silent! execute 'autocmd BufUnload <buffer> execute bufwinnr(' . bufnr . ') . ''wincmd w'''
+        silent! execute 'autocmd BufEnter <buffer> execute ''resize '' .  line(''$'')'
+        silent! execute 'nnoremap <silent> <buffer> <CR> :call <SID>ExecuteInShell(''' . _ . ''', '''')<CR>'
+        silent! execute 'nnoremap <silent> <buffer> <LocalLeader>r :call <SID>ExecuteInShell(''' . _ . ''', '''')<CR>'
+        silent! execute 'nnoremap <silent> <buffer> <LocalLeader>g :execute bufwinnr(' . bufnr . ') . ''wincmd w''<CR>'
+        nnoremap <silent> <buffer> <C-W>_ :execute 'resize ' . line('$')<CR>
+        silent! syntax on
+    endif
+endfunction
+
+command! -complete=shellcmd -nargs=* -bang Shell call s:ExecuteInShell(<q-args>, '<bang>')
+cabbrev shell Shell
+
+" my additional tools
+command! -complete=shellcmd -nargs=* -bang Gor call s:ExecuteInShell('go run %', '<bang>')
+command! -complete=shellcmd -nargs=* -bang Gob call s:ExecuteInShell('go build', '<bang>')
+command! -complete=shellcmd -nargs=* -bang Gon call s:ExecuteInShell('go install', '<bang>')
+command! -complete=shellcmd -nargs=* -bang Got call s:ExecuteInShell('go test -v', '<bang>')
+
+autocmd FileType go map <leader>gr  :w<CR>:Gor<CR>
+autocmd FileType go map <leader>gb  :w<CR>:Gob<CR>
+autocmd FileType go map <leader>gi  :w<CR>:Gon<CR>
+autocmd FileType go map <leader>gt  :w<CR>:Got<CR>
+
+autocmd FileType go nmap gtj :CocCommand go.tags.add json<cr>
+autocmd FileType go nmap gty :CocCommand go.tags.add yaml<cr>
+autocmd FileType go nmap gtx :CocCommand go.tags.clear<cr>
+
+autocmd BufWritePre *.go :silent call CocAction('runCommand', 'editor.action.organizeImport')
