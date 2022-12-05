@@ -5,7 +5,7 @@
     },
     "yaml.enable": true,
     "yaml.completion": true,
-    "yaml.format.enable": true,
+    "yaml.format.enable": false,
     "yaml.validate": true,
     "yaml.schemaStore.enable": true,
     "yaml.schemas": {
@@ -24,6 +24,11 @@
         "markdown",
         "terraform",
         "yaml"
+    ],
+    "html-css-support.styleSheets": [
+        "https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css",
+        "/style.css",
+        "style.css"
     ],
     "languageserver": {
         "go": {
