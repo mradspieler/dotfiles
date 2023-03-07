@@ -25,6 +25,7 @@ imap <C-v> <ESC>"+pa
 " http://stackoverflow.com/questions/20186975/vim-mac-how-to-copy-to-clipboard-without-pbcopy
 set clipboard=unnamed
 
+
 " search across files in the project root directory
 "nmap <C-a> :ProjectRootExe Files<CR>
 "imap <C-a> <esc>:ProjectRootExe Files<CR>
@@ -130,3 +131,4 @@ autocmd FileType go nmap gty :CocCommand go.tags.add yaml<cr>
 autocmd FileType go nmap gtx :CocCommand go.tags.clear<cr>
 
 autocmd BufWritePre *.go :silent call CocAction('runCommand', 'editor.action.organizeImport')
+let g:airline_extensions = []
