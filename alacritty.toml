@@ -1,7 +1,3 @@
-live_config_reload = true
-"window.dynamic_title" = true
-"window.opacity" = 1.0
-
 [bell]
 animation = "EaseOutExpo"
 duration = 0
@@ -58,7 +54,7 @@ render_timer = false
 TERM = "xterm-256color"
 
 [font]
-AppleFontSmoothing = true
+#AppleFontSmoothing = true
 size = 14.0
 
 [font.bold]
@@ -743,15 +739,6 @@ hide_when_typing = true
 [[mouse.bindings]]
 action = "PasteSelection"
 mouse = "Middle"
-
-[mouse.double_click]
-threshold = 300
-
-[mouse.hints]
-launcher = "open"
-
-[mouse.triple_click]
-threshold = 300
 
 [scrolling]
 history = 90000
