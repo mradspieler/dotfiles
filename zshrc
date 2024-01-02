@@ -65,7 +65,6 @@ ZSH_THEME="robbyrussell"
 plugins=(
   git
   golang
-  oc
   vscode
   fzf
   kubectl
@@ -115,7 +114,7 @@ f() {
 }
 
 # Like f, but not recursive.
-fm() f "$@" --max-depth 1
+fm() f "$@" --max-depth 3
 
 # Deps
 alias fz="fzf-noempty --bind 'tab:toggle,shift-tab:toggle+beginning-of-line+kill-line,ctrl-j:toggle+beginning-of-line+kill-line,ctrl-t:top' --color=light -1 -m"
@@ -165,7 +164,6 @@ fh() {
 
 if [ "$TMUX" = "" ]; then tmux; fi
 
-eval "$(mcfly init zsh)"
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
