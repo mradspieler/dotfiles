@@ -1,0 +1,11 @@
+gui:
+  skipDiscardChangeWarning: true
+  skipStashWarning: true
+git:
+  paging:
+    colorArg: never
+    pager: delta --dark --paging=never 
+    # pager: ydiff -p cat -s --wrap --width={{columnWidth}}   
+    useConfig: false
+  branchLogCmd: "git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+
